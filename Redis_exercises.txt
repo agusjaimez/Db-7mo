@@ -1,0 +1,93 @@
+3)Write examples with string
+
+SET string1 Jaimez
+GET string1
+
+4)Write examples with hashes
+
+HMSET pelicula name "Titanic" description "el barco que se hundio" likes 5
+HGETALL pelicula
+
+5)Write examples with Lists
+
+LPUSH lista val1
+LPUSH lista val2
+LPUSH lista val3
+
+6)Write examples with Sets
+
+SADD celulares s10
+SADD celulares note10
+SADD celulares s20
+SADD celulares s20 //duplicado
+
+Si hacemos:
+SMEMBERS celulares
+Los resultados seran:
+1) "s10" 
+2) "note10" 
+3) "s20"
+Como se ve solo muestra 3 valores ya que los sets solo permiten valores unicos
+
+7)Write examples with Sorted Sets
+
+ZADD celulares 1 s10
+ZADD celulares 3 s10e
+ZADD celulares 2 s10plus
+
+Si hacemos:
+ZRANGE celulares 0 10 WITHSCORES
+El output sera:
+1) "s10" 
+2) "1" 
+3) "s10plus" 
+4) "2" 
+5) "s10e" 
+6) "3" 
+
+Los sorted Sets solo permiten valores unicos, pero en caso de que ya exista un valor y se lo intente subir con
+una score diferente e inexistente, esta reasignara por la nueva
+Ejemplo:
+Si con los valores agregados previamente agrego lo siguiente:
+ZADD celulares 4 s10e
+Y hacemos la consulta:
+ZRANGE celulares 0 10 WITHSCORES
+El output sera:
+1) "s10" 
+2) "1" 
+3) "s10plus" 
+4) "2" 
+5) "s10e" 
+6) "4" 
+
+8)Write examples using Publish Subscribe
+
+SUBSCRIBE channel_test
+PUBLISH channel_test "Hola Alesi"
+
+9)Write examples using Transactions
+
+MULTI
+SET string1 Jaimez
+GET string1
+LPUSH lista val1
+LPUSH lista val2
+LPUSH lista val3
+EXEC 
+
+10)Investigate backups
+Los backups son para guardar la base de datos en el disco en un momento deseado, se logra con el comando SAVE.
+Este comando crea un archivo dump.rdb en el directorio de redis.
+
+11)Investigate Benchmarks - Run some
+Sintaxis:
+redis-benchmark [option] [option value]
+Ejemplo:
+redis-benchmark -n 100000
+No se debe ejecutar desde el CLI de Redis
+Se ejecuta de la siguiente manera:
+
+Sin docker:
+redis-benchmark -t set,get -r 1000000 -q
+Con docker:
+docker exec -it redis redis-benchmark -t set,get -r 1000000 -q

@@ -33,4 +33,4 @@ db.films.aggregate(
 ```
 
 # 8)Get all the films that are available in store id 2 and the manager first/last name of this store (the manager will appear in all the rows).
-No me salio :point_right::point_left:
+No me salió :point_right::point_left:

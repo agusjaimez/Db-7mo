@@ -1,4 +1,4 @@
-<h1 align="center">Mongo DB Exercises</h1>
+<h1 align="center">Mongo DB Exercises :sunglasses:</h1>
 
 # 1)Show title and special_features of films that are PG-13
 ```
